@@ -1,0 +1,9 @@
+RewriteEngine on 
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [QSA,L]
+
+AddType font/woff2 .woff2
+AddType font/woff .woff
+AddType application/font-ttf .ttf
+AddType application/vnd.ms-fontobject .eot
