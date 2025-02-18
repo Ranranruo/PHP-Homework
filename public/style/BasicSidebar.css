@@ -1,0 +1,69 @@
+#basic-aside {
+  border-right: 1px solid rgb(var(--color-achromatic02));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  background-color: rgb(var(--color-achromatic01));
+  > .logo {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: var(--gap-spacing-small);
+    > img {
+     height: 23px;
+    }
+    > h1 {
+      color: rgb(var(--color-primary01));
+      font-size: var(--font-size-title-verysmall);
+    }
+  }
+  > nav.menu {
+    padding-top: 30px;
+    height: 100%;
+    > ul {
+      display: flex;
+      flex-direction: column;
+      & a {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        gap: var(--gap-spacing-small);
+        > svg {
+          width: 20px;
+          transition: .3s;
+          fill: rgb(var(--color-achromatic03));
+        }
+        > p {
+          font-size: var();
+          transition: .3s;
+          color: rgb(var(--color-achromatic03));
+        }
+      }
+      & a:hover {
+        > svg {
+          fill: rgb(var(--color-primary01));
+        }
+        > p {
+          color: rgb(var(--color-primary01));
+        }
+      }
+    }
+  }
+  .auth {
+    padding: 15px;
+    > a {
+      font-size: var(--font-size-content-small);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5px;
+      padding: .3em 0;
+      color: rgb(var(--color-achromatic01));
+      background-color: rgb(var(--color-blue01));
+    }
+    > a:hover {
+      background-color: rgb(var(--color-blue02));
+    }
+  }
+}

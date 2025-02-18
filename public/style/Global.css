@@ -1,11 +1,26 @@
 :root {
   /* color */
-  --color-primary01: rgba(30, 215, 96);
+  --color-primary01: 30, 215, 96;
 
-  --color-black01: rgba(18, 18, 18);
+  --color-blue01: 0, 149, 246;
+  --color-blue02: 24, 119, 242;
 
-  --color-white01: rgba(255, 255, 255);
-  --color-white02: rgba(233, 231, 231);
+  --color-achromatic01: 255, 255, 255; /* #ffffff */
+  --color-achromatic02: 238, 238, 238; /* #eeeeee */
+  --color-achromatic03: 221, 221, 221; /* #dddddd */
+  --color-achromatic04: 204, 204, 204; /* #cccccc */
+  --color-achromatic05: 187, 187, 187; /* #bbbbbb */
+  --color-achromatic06: 170, 170, 170; /* #aaaaaa */
+  --color-achromatic07: 153, 153, 153; /* #999999 */
+  --color-achromatic08: 136, 136, 136; /* #888888 */
+  --color-achromatic09: 119, 119, 119; /* #777777 */
+  --color-achromatic10: 102, 102, 102; /* #666666 */
+  --color-achromatic11: 85, 85, 85;    /* #555555 */
+  --color-achromatic12: 68, 68, 68;    /* #444444 */
+  --color-achromatic13: 51, 51, 51;    /* #333333 */
+  --color-achromatic14: 34, 34, 34;    /* #222222 */
+  --color-achromatic15: 17, 17, 17;    /* #111111 */
+  /* --color-white03: rgba(2) */
 
   /* gap */
   --gap-spacing-verysmall: 5px;
@@ -49,11 +64,12 @@
   font-family: 'Cookie';
   font-weight: 400;
 }
-.inner {
-  width: 1420px;
-  padding: 5px 15px;
-  margin: 0 auto;
+#app {
+  width: 100%;
+  height: 100vh;
+  display: flex;
 }
+
 @font-face {
   font-family: 'Cookie';
   font-weight: 400;

@@ -1,0 +1,101 @@
+#login {
+  display: grid;
+  grid-template-columns: 4fr 6fr;
+  grid-template-rows: 1fr;
+  width: 100%;
+  height: 100vh;
+
+  >form {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--gap-spacing-huge);
+    align-items: center;
+    border-radius: 0px 20px 20px 0;
+    background-color: rgb(var(--color-primary01));
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, .2);
+
+    >.title {
+      font-size: var(--font-size-title-huge);
+      color: rgb(var(--color-achromatic01));
+      font-weight: var(--font-weight-black);
+    }
+
+    >.inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+
+      >.input {
+        position: relative;
+
+        >p {
+          transition: .5s;
+          color: white;
+          position: absolute;
+          left: 0;
+          bottom: 10px;
+          font-size: var(--font-size-content-small);
+        }
+
+        >input {
+          width: 20em;
+          padding: .5em;
+          font-size: var(--font-size-content-large);
+          outline: none;
+          background: transparent;
+          border: transparent;
+          color: rgb(var(--color-achromatic01));
+          border-bottom: 2px solid rgb(var(--color-achromatic01));
+        }
+      }
+
+      >.input:has(input:focus, input.active) {
+        >p {
+          bottom: 100%;
+        }
+      }
+      >.find-password {
+        display: flex;
+        justify-content: flex-end;
+
+        >a {
+          color: rgb(var(--color-achromatic01));
+          text-decoration: underline;
+        }
+      }
+    }
+
+    >.buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
+      > #login-button {
+        color: rgb(var(--color-achromatic01));
+        background-color: rgb(var(--color-achromatic13));
+        border-radius: 10px;
+        padding: 1em 10em;
+        cursor: pointer;
+      }
+      > #signin-button:hover {
+        background-color: rgb(var(--color-achromatic14));
+      }
+      > #signup-button {
+        background-color: rgb(var(--color-achromatic01));
+        
+      }
+    }
+  }
+
+  >.video {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    >video {
+      width: 70%;
+    }
+  }
+}
