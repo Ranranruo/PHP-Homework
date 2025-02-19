@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: var(--gap-spacing-huge);
+    gap: 60px;
     align-items: center;
     border-radius: 0px 20px 20px 0;
     background-color: rgb(var(--color-primary01));
@@ -25,7 +25,7 @@
     > .inputs {
       display: flex;
       flex-direction: column;
-      gap: 40px;
+      gap: var(--gap-spacing-huge);
 
       > .input {
         position: relative;
@@ -72,10 +72,10 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+      gap: var(--gap-spacing-small);
       margin-top: 30px;
 
-      > button {
+      > button, a {
         color: rgb(var(--color-achromatic01));
         background-color: rgb(var(--color-achromatic13));
         border-radius: 10px;

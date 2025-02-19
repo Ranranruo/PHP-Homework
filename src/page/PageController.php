@@ -3,6 +3,9 @@ include_once "src/lib/View.php";
 GET("/", function() {
   view("Main", "Basic");
 });
-GET("/login", function() {
-  view("Login");
+GET("/sign-in", function() {
+  view("SignIn");
+});
+GET("/sign-up", function() {
+  view("SignUp");
 });

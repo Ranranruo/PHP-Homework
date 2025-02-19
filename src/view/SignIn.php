@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="public/style/Login.css">
+<link rel="stylesheet" href="public/style/SignIn.css">
 <main id="login">
   <form action="">
     <h1 class="title">Sign In</h1>
@@ -12,12 +12,12 @@
         <input type="password" id="password">
       </li>
       <li class="find-password">
-        <a href="#">forget password?</a>
+        <a href="#">forgot password?</a>
       </li>
     </ul>
     <div class="buttons">
       <button id="signin-button">Sign in</button>
-      <button id="signup-button">Sign up</button>
+      <button type="button" id="signup-button" onclick="location.href='/sign-up'">Sign up</button>
     </div>
   </form>
   <div class="video">

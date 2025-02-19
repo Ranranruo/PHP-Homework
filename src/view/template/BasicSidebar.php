@@ -25,6 +25,6 @@
       </ul>
     </nav>
     <div class="auth">
-      <a href="/login">Login</a>
+      <a href="/sign-in">Sign In</a>
     </div>
 </aside>
