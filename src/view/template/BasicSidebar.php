@@ -25,6 +25,6 @@
       </ul>
     </nav>
     <div class="auth">
-      <a href="/login">로그인</a>
+      <a href="/login">Login</a>
     </div>
 </aside>
