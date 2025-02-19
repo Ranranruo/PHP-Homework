@@ -1,9 +1,6 @@
 <link rel="stylesheet" href="public/style/BasicSidebar.css">
 <aside id="basic-aside">
-    <a href="#" class="logo">
-      <img src="public/image/Logo.svg" alt="">
-      <h1>Homework</h1>
-    </a>
+    <?php require_once "src/view/component/Logo.php"; ?>
     <nav class="menu">
       <ul>
         <li><a href="#">

@@ -1,11 +1,13 @@
 <?php
-include_once "src/lib/DB.php";
-include_once "src/lib/Router.php";
-include_once "src/lib/Auth.php";
-
-include_once "src/page/PageController.php";
-
-include_once "src/auth/AuthController.php";
-
+$requireFileFilter = [
+    "src/lib/*.php", // libs
+    "src/*/*Controller.php", // controllers
+    "src/view/component/*.php" // components
+];
+foreach($requireFileFilter as $filter) {
+    foreach(glob($filter) as $lib) {
+        require_once $lib;
+    };
+}
 
 Router::handleRequest();
