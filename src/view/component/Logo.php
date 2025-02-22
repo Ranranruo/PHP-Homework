@@ -3,6 +3,7 @@ function Logo($props)
 {
     $type = "primary"; // Logo type
     $text = "Homework"; // Logo inne text
+    $size = "verysmall"; // Logo size
     extract($props);
 ?>
     <style>
@@ -11,14 +12,14 @@ function Logo($props)
             padding: 15px;
             display: flex;
             align-items: center;
-            gap: var(--gap-spacing-small);
+            gap: var(--gap-spacing-verysmall);
 
             >svg {
-                height: 23px;
+                height: var(--font-size-title-<?=$size?>);
             }
 
             >h1 {
-                font-size: var(--font-size-title-verysmall);
+                font-size: var(--font-size-title-<?=$size?>);
                 color: rgb(var(--color-primary01));          
             }
         }
