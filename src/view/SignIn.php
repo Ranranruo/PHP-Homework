@@ -12,7 +12,7 @@
         <input type="password" id="password">
       </li>
       <li class="find-password">
-        <a href="#">forgot password?</a>
+        <a href="#">forget password?</a>
       </li>
     </ul>
     <div class="buttons">

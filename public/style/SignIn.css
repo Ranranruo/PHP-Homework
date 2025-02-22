@@ -12,7 +12,7 @@
     justify-content: center;
     gap: 60px;
     align-items: center;
-    border-radius: 0px 100px 100px 0;
+    border-radius: 0px 10px 10px 0;
     background-color: rgb(var(--color-primary01));
     box-shadow: 1px 1px 5px rgba(0, 0, 0, .3);
 

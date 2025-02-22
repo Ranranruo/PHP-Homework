@@ -1,0 +1,58 @@
+#sign-up {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    > form {
+        display: flex;
+        flex-direction: column;
+
+        > .inputs {
+            display: flex;
+            flex-direction: column;
+            > .input {
+                display: flex;
+                flex-direction: column;
+                gap: var(--gap-spacing-verysmall);
+                > p {
+                    font-size: var(--font-size-content-small);
+                    color: rgb(var(--color-achromatic08));
+                }
+                > input {
+                    width: 20em;
+                    padding: .5em 1em;
+                    border-radius: 5px;
+                    border: 1px solid rgb(var(--color-achromatic08));
+                    color: rgb(var(--color-achromatic08));
+                    outline: none;
+                }
+            }
+            > .input:has(input:focus) {
+                > p {
+                    color: rgb(var(--color-achromatic13));
+                }
+                > input {
+                    color: rgb(var(--color-achromatic13));
+                    border: 1px solid rgb(var(--color-achromatic13));
+                }                
+            }
+            > .input.active {
+                > p {
+                    color: rgb(var(--color-primary01)) !important;
+                }
+                > input {
+                    border: 1px solid rgb(var(--color-primary01)) !important;
+                }
+            }
+            > .input.disabled {
+                > p {
+                    color: rgb(var(--color-warning01)) !important;
+                }
+                > input {
+                    border: 1px solid rgb(var(--color-warning01)) !important;
+                }
+            }
+        }
+    }
+}

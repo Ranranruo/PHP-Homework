@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="public/style/BasicSidebar.css">
 <aside id="basic-aside">
-    <?php require_once "src/view/component/Logo.php"; ?>
+  <?=Logo(["type" => "white"])?>
     <nav class="menu">
       <ul>
         <li><a href="#">
