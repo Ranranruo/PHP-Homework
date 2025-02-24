@@ -11,19 +11,26 @@ const initState = {
 }
 
 const state = new Proxy(initState, {
-  async set(target, props, value) {
-    target[props] = value;
+  async set(target, prop, value) {
+    if(!(prop in target)) throw new Error("Cannot add new property to state")
+    target[prop] = value;
     await render();
-  }
+  }, 
+  deleteProperty(target, prop) {
+    throw new Error(`Cannot delete property '${prop} from state'`)
+}
 })
 
 
 const render = async () => {
-  Object.entries(state).forEach(([props, value]) => {
-    const $input = document.querySelector(`#${props}`);
+  Object.entries(state).forEach(([prop, value]) => {
+    const $input = document.querySelector(`#${prop}`);
     if(value != "")
       $input.classList.add("active");
     else
       $input.classList.remove("active");
   })
 };
+
+
+render();

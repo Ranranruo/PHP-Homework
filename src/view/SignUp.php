@@ -3,17 +3,20 @@
     <?=Logo(["type" => "primary", "size" => "small"])?>
     <form action="">
         <ul class="inputs">
-            <li class="input">
-                <p>* Username</p>
-                <input type="text" class="username">
+            <li class="input disabled">
+                <h1>* Username</h1>
+                <input type="text" id="username">
+                <p class="message">Cannot using password</p>
             </li>
             <li class="input">
-                <p>* Displayname</p>
-                <input type="text" class="username">
+                <h1>* Displayname</h1>
+                <input type="text" id="displayname">
+                <p class="message"></p>
             </li>
             <li class="input">
-                <p>* Password</p>
-                <input type="text" class="username">
+                <h1>* Password</h1>
+                <input type="text" id="password">
+                <p class="message"></p>
             </li>
         </ul>
         <div class="buttons">
@@ -21,3 +24,4 @@
         </div>
     </form>
 </main>
+<script src="public/script/SignUp.js"></script>

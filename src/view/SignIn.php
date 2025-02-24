@@ -21,7 +21,7 @@
     </div>
   </form>
   <div class="video">
-    <video src="public/mp4/Login.mp4" autoplay loop muted></video>
+    <video src="public/mp4/SignIn.mp4" autoplay loop muted></video>
   </div>
 </main>
-<script src="public/script/Login.js"></script>
+<script src="public/script/SignIn.js"></script>

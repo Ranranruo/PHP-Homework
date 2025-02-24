@@ -16,14 +16,15 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: var(--gap-spacing-medium);
+            gap: calc(var(--gap-spacing-medium) + 5px);
 
             >.input {
                 display: flex;
+                position: relative;
                 flex-direction: column;
                 gap: var(--gap-spacing-verysmall);
 
-                >p {
+                >h1 {
                     font-size: var(--font-size-content-small);
                     color: rgb(var(--color-achromatic07));
                 }
@@ -36,10 +37,21 @@
                     color: rgb(var(--color-achromatic07));
                     outline: none;
                 }
+
+                > p.message {
+                    text-transform: capitalize;
+                    transition: .2s;
+                    position: absolute;
+                    font-size: var(--font-size-content-verysmall);
+                    top: calc(100% + 2px);
+                    left: 2px;
+                    color: rgb(var(--color-warning01));
+                    opacity: 0;
+                }
             }
 
             >.input:has(input:focus) {
-                >p {
+                >h1 {
                     color: rgb(var(--color-achromatic13));
                 }
 
@@ -50,7 +62,7 @@
             }
 
             >.input.active {
-                >p {
+                >h1 {
                     color: rgb(var(--color-primary01)) !important;
                 }
 
@@ -60,12 +72,16 @@
             }
 
             >.input.disabled {
-                >p {
+                >h1 {
                     color: rgb(var(--color-warning01)) !important;
                 }
 
                 >input {
                     border: 1px solid rgb(var(--color-warning01)) !important;
+                }
+                
+                > p.message {
+                    opacity: 1;
                 }
             }
         }
@@ -81,7 +97,7 @@
                 padding: .8em 8em;
                 cursor: pointer;
             }
-            > button:hover {
+            > button.active {
                 background-color: rgb(var(--color-primary01));
             }
         }
