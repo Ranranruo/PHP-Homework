@@ -18,7 +18,7 @@ const state = new Proxy(initState, {
   }, 
   deleteProperty(target, prop) {
     throw new Error(`Cannot delete property '${prop} from state'`)
-}
+  } 
 })
 
 

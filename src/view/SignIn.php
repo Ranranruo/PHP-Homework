@@ -11,8 +11,8 @@
         <p>Password</p>
         <input type="password" id="password">
       </li>
-      <li class="find-password">
-        <a href="#">forget password?</a>
+      <li id="find-password">
+        <a href="#">Forgot password?</a>
       </li>
     </ul>
     <div class="buttons">

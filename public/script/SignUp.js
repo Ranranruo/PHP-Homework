@@ -1,7 +1,10 @@
-const $$input = document.querySelectorAll("input");
+import * as regexs from "./lib/Validation.js";
+import { createDeepProxy } from "./lib/Proxy.js";
 
-const checkSpecialSymbols = /[^a-zA-Z0-9\sㄱ-ㅎ가-힣]/;
-const checkKorean = /[ㄱ-ㅎ가-힣]/;
+const $$input = document.querySelectorAll("input");
+const $submit = document.querySelector("#submit");
+const $eye = document.querySelector("#eye");
+const $password = document.querySelector("#password");
 
 // 유효성 검사 설정
 const validationConfig = {
@@ -46,39 +49,99 @@ const initState = {
     }
 }
 
-$$input.forEach($input => $input.addEventListener("change", (event) => {
-    const id = event.target.id;
-    const value = event.target.value;
+const reRenderProps = ["value"]
 
-    initState[id].value = value;
-}));
-
-const state = new Proxy(initState, {
+const state = createDeepProxy(initState, {
+    allValid: false,
+    passwordHide: true,
+    get(target, prop) {
+        if(prop === "allValid") return this.allValid;
+        if(prop === "passwordHide") return this.passwordHide;
+        return target[prop];
+    },
     async set(target, prop, value) {
+        if(prop === "allValid") return this.allValid = value;
+        if(prop === "passwordHide") return this.passwordHide = value;
+
         if(!(prop in target)) throw new Error("Cannot add new property to state")
         target[prop] = value;
-        validateState();
-        await render();
-    },
+        if(reRenderProps.includes(prop)) {
+            validateState();
+            await render();
+        }
+    }, 
     deleteProperty(target, prop) {
-        throw new Error(`Cannot delete property '${prop} from state'`)
+        throw new Error(`Cannot delete property '${prop} from state'`);
     }
-})
+});
 
 const validateState = () => {
     Object.entries(state).forEach(([prop, {value, valid}]) => {
         const rule = validationConfig[prop];
         const length = value.length;
-        if(length < rule.minLength || length > value)
+        state[prop].valid = false;
+        if(value === "") {
+            state[prop].valid = null;
+            return
+        }
+        else if(length < rule.minLength || length > rule.maxLength)
             state[prop].message = `${prop} must be between ${rule.minLength} and ${rule.maxLength} characters.`;
-        else if()
+        else if(!regexs.specialSymbolsRegex.test(value) && rule.requireSpecialSymbols)
+            state[prop].message = `${prop} must include a special symbols.`;
+        else if(!regexs.numbersRegex.test(value) && rule.requireNumbers)
+            state[prop].message = `${prop} must include a number.`;
+        else {
+            state[prop].valid = true;
+        }
     });
+    state.allValid = Object.values(state).find(object => !object.valid) === undefined;
+    console.log(state.allValid);
 }
 
 const render = async () => {
-    Object.entries(state).forEach(([prop, {value, valid}]) => {
+    // input
+    Object.entries(state).forEach(([prop, {value, valid, message}]) => {
         const $input = document.querySelector(`.input:has(#${prop})`);
         const className = valid == null ? "" : valid ? "active" : "disabled";
         $input.classList = "input " + className;
+        
+        if(valid === false) {
+            const $message = $input.querySelector(".message");
+            $message.innerText = message;
+        }
     });
+
+    // signup button
+    if(state.allValid) 
+        $submit.classList.add("active");
+    else $submit.classList.remove("active");
+
 }
+
+$$input.forEach($input => $input.addEventListener("input", async (event) => {
+    const id = event.target.id;
+    const value = event.target.value;
+
+    state[id].value = value;
+}));
+
+// password hide
+$eye.addEventListener("click", (event) => {
+    console.log("a")
+    const newType = $password.type === "text" ? "password" : "text";
+    $password.type = newType;
+});
+
+// submit
+$submit.addEventListener("click", (event) => {
+    if(state.allValid) return true;
+    const message = Object.entries(state).reduce((acc, [key, object], idx, arr) => {
+        if(object.valid !== true) {
+            if(idx == arr.length - 1) return `${acc} ${key}`;
+            else return `${acc} ${key},`;
+        }
+        return acc;
+    }, 'Enter valid');
+    alert(message);
+    event.preventDefault();
+});

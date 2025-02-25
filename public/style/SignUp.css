@@ -16,7 +16,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: calc(var(--gap-spacing-medium) + 5px);
+            gap: calc(var(--gap-spacing-large) + 5px);
 
             >.input {
                 display: flex;
@@ -39,7 +39,6 @@
                 }
 
                 > p.message {
-                    text-transform: capitalize;
                     transition: .2s;
                     position: absolute;
                     font-size: var(--font-size-content-verysmall);
@@ -47,6 +46,45 @@
                     left: 2px;
                     color: rgb(var(--color-warning01));
                     opacity: 0;
+                }
+                > #eye {
+                    cursor: pointer;
+                    transition: .1s;
+                    opacity: .3;
+                    fill: rgb(var(--color-achromatic07));
+                    height: 1em;
+                    position: absolute;
+                    bottom: .5em;
+                    right: .5em;
+                }
+                &:not(.disabled, .active) > #eye {
+                    opacity: 1;
+                }
+                &:has(#eye)::after {
+                    transition: .1s;
+                    opacity: .3;
+                    content: '';
+                    z-index: 100;
+                    display: flex;
+                    position: absolute;
+                    bottom: .5em;
+                    rotate: 30deg;
+                    right: 1em;
+                    width: 2px;
+                    height: 1em;
+                    background-color: rgb(var(--color-achromatic07));
+                }
+                &:not(.disabled, .active)::after {
+                    opacity: 1;
+                }
+                #eye:hover {
+                    opacity: 1;
+                }
+                &:has(#eye:hover)::after {
+                    opacity: 1;
+                }
+                &:has(input[type="text"])::after {
+                    opacity: 0 !important;
                 }
             }
 
@@ -59,6 +97,7 @@
                     color: rgb(var(--color-achromatic13));
                     border: 1px solid rgb(var(--color-achromatic13));
                 }
+
             }
 
             >.input.active {
@@ -84,12 +123,14 @@
                     opacity: 1;
                 }
             }
+            
         }
 
         >.buttons {
             display: flex;
             justify-content: center;
-            > button {
+            position: relative;
+            > button#submit {
                 color: rgb(var(--color-achromatic01));
                 background-color: rgb(var(--color-achromatic04));
                 border: none;
@@ -97,8 +138,16 @@
                 padding: .8em 8em;
                 cursor: pointer;
             }
-            > button.active {
-                background-color: rgb(var(--color-primary01));
+            > button#submit.active {
+                /* background-color: rgb(var(--color-primary01)); */
+                background-color: rgb(var(--color-achromatic13));
+            }
+            > #already-account {
+                position: absolute;
+                top: calc(100% + 5px);
+                color: rgb(var(--color-achromatic13));
+                font-size: var(--font-size-content-verysmall);
+                text-decoration: underline;
             }
         }
     }

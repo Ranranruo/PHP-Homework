@@ -57,7 +57,7 @@
         }
       }
 
-      > .find-password {
+      > #find-password {
         display: flex;
         justify-content: flex-end;
 
@@ -88,6 +88,7 @@
       }
 
       > #signup-button {
+        border: 2px solid rgb(var(--color-achromatic13));
         background-color: rgb(var(--color-achromatic01));
         color: rgb(var(--color-achromatic13));
       }
