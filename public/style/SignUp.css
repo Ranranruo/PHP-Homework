@@ -75,7 +75,7 @@
                     background-color: rgb(var(--color-achromatic07));
                 }
                 &:not(.disabled, .active)::after {
-                    opacity: 1;
+                    opacity: 1 !important;
                 }
                 #eye:hover {
                     opacity: 1;

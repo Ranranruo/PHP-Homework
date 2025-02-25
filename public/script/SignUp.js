@@ -80,10 +80,14 @@ const validateState = () => {
         const rule = validationConfig[prop];
         const length = value.length;
         state[prop].valid = false;
+        if(prop == "username")
+            console.log(!(regexs.koreanRegex.test(value)) && rule.allowKorean);
         if(value === "") {
             state[prop].valid = null;
             return
         }
+        else if (regexs.koreanRegex.test(value) && !rule.allowKorean)
+            state[prop].message = `${prop} cannot include Korean characters.`;
         else if(length < rule.minLength || length > rule.maxLength)
             state[prop].message = `${prop} must be between ${rule.minLength} and ${rule.maxLength} characters.`;
         else if(!regexs.specialSymbolsRegex.test(value) && rule.requireSpecialSymbols)
@@ -95,7 +99,6 @@ const validateState = () => {
         }
     });
     state.allValid = Object.values(state).find(object => !object.valid) === undefined;
-    console.log(state.allValid);
 }
 
 const render = async () => {
@@ -127,7 +130,6 @@ $$input.forEach($input => $input.addEventListener("input", async (event) => {
 
 // password hide
 $eye.addEventListener("click", (event) => {
-    console.log("a")
     const newType = $password.type === "text" ? "password" : "text";
     $password.type = newType;
 });
