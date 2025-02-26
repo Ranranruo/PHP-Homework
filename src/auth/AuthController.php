@@ -1,7 +1,8 @@
 <?php
-
-GET("/member", function() {
-
+GET("/api/members/{username}/exists", function($username) {
+  $alreadyMember = DB::fetch("SELECT * FROM member WHERE username = ?", [$username]);
+  $response = new Response();
+  echo $response->body($alreadyMember != null)->json();
 });
 
 POST("/sign-up", function() {

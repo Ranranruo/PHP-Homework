@@ -80,8 +80,6 @@ const validateState = () => {
         const rule = validationConfig[prop];
         const length = value.length;
         state[prop].valid = false;
-        if(prop == "username")
-            console.log(!(regexs.koreanRegex.test(value)) && rule.allowKorean);
         if(value === "") {
             state[prop].valid = null;
             return
@@ -96,6 +94,10 @@ const validateState = () => {
             state[prop].message = `${prop} must include a number.`;
         else {
             state[prop].valid = true;
+        }
+
+        if(prop == "username") {
+            
         }
     });
     state.allValid = Object.values(state).find(object => !object.valid) === undefined;
