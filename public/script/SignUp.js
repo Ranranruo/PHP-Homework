@@ -1,15 +1,20 @@
 import * as regexs from "./lib/Validation.js";
 import { createDeepProxy } from "./lib/Proxy.js";
+import MemberAPI from "./api/MemberAPI.js";
+
+const memberAPI = MemberAPI();
 
 const $$input = document.querySelectorAll("input");
 const $submit = document.querySelector("#submit");
 const $eye = document.querySelector("#eye");
 const $password = document.querySelector("#password");
 
+const $canvas = document.querySelector("canvas");
+
 // 유효성 검사 설정
 const validationConfig = {
     username: {
-        minLength: 6, // 최소 길이
+        minLength: 5, // 최소 길이
         maxLength: 18, // 최대 길이
         requireSpecialSymbols: false, // 특수기호가 포함 되어 있어야 하는지 여부
         requireNumbers: false, // 숫자가 포함 되어 있어야 하는지 여부
@@ -46,6 +51,11 @@ const initState = {
         value: "",
         valid: null, 
         message: ""
+    },
+    captcha: {
+        value: "",
+        valid: null,
+        message: ""
     }
 }
 
@@ -66,7 +76,7 @@ const state = createDeepProxy(initState, {
         if(!(prop in target)) throw new Error("Cannot add new property to state")
         target[prop] = value;
         if(reRenderProps.includes(prop)) {
-            validateState();
+            await validateState();
             await render();
         }
     }, 
@@ -75,8 +85,8 @@ const state = createDeepProxy(initState, {
     }
 });
 
-const validateState = () => {
-    Object.entries(state).forEach(([prop, {value, valid}]) => {
+const validateState = async () => {
+    const validationPromises = Object.entries(state).map(async ([prop, {value, valid}]) => {
         const rule = validationConfig[prop];
         const length = value.length;
         state[prop].valid = false;
@@ -96,10 +106,15 @@ const validateState = () => {
             state[prop].valid = true;
         }
 
-        if(prop == "username") {
-            
+        if(prop == "username" && state[prop].valid) {
+            const isAlready = await memberAPI.existsByUsername(value);
+            if(isAlready) {
+                state[prop].valid = false;
+                state[prop].message = `${prop} is already in use`;
+            }
         }
     });
+    await Promise.all(validationPromises);
     state.allValid = Object.values(state).find(object => !object.valid) === undefined;
 }
 

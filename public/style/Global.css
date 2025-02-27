@@ -87,3 +87,9 @@
   font-weight: 900;
   src: url("../font/CookieRun\ Black.ttf");
 }
+
+@font-face {
+  font-family: 'Captcha';
+  font-weight: 400;
+  src: url("../font/Captcha.ttf");
+}

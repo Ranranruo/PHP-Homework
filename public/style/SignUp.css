@@ -4,26 +4,24 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    > .logo {
+
+    >.logo {
         margin-top: 10px;
         margin-bottom: 40px;
     }
-    > form {
+
+    >form {
         display: flex;
         flex-direction: column;
         gap: var(--gap-spacing-huge);
+
         >.inputs {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: calc(var(--gap-spacing-large) + 5px);
 
-            >.input {
-                display: flex;
-                position: relative;
-                flex-direction: column;
-                gap: var(--gap-spacing-verysmall);
-
+            >li {
                 >h1 {
                     font-size: var(--font-size-content-small);
                     color: rgb(var(--color-achromatic07));
@@ -37,8 +35,15 @@
                     color: rgb(var(--color-achromatic07));
                     outline: none;
                 }
+            }
 
-                > p.message {
+            >.input {
+                display: flex;
+                position: relative;
+                flex-direction: column;
+                gap: var(--gap-spacing-verysmall);
+
+                >p.message {
                     transition: .2s;
                     position: absolute;
                     font-size: var(--font-size-content-verysmall);
@@ -47,7 +52,8 @@
                     color: rgb(var(--color-warning01));
                     opacity: 0;
                 }
-                > #eye {
+
+                >#eye {
                     cursor: pointer;
                     transition: .1s;
                     opacity: .3;
@@ -57,9 +63,11 @@
                     bottom: .5em;
                     right: .5em;
                 }
-                &:not(.disabled, .active) > #eye {
+
+                &:not(.disabled, .active)>#eye {
                     opacity: 1;
                 }
+
                 &:has(#eye)::after {
                     transition: .1s;
                     opacity: .3;
@@ -74,15 +82,19 @@
                     height: 1em;
                     background-color: rgb(var(--color-achromatic07));
                 }
+
                 &:not(.disabled, .active)::after {
                     opacity: 1 !important;
                 }
+
                 #eye:hover {
                     opacity: 1;
                 }
+
                 &:has(#eye:hover)::after {
                     opacity: 1;
                 }
+
                 &:has(input[type="text"])::after {
                     opacity: 0 !important;
                 }
@@ -118,19 +130,41 @@
                 >input {
                     border: 1px solid rgb(var(--color-warning01)) !important;
                 }
-                
-                > p.message {
+
+                >p.message {
                     opacity: 1;
                 }
             }
-            
+
+            .captcha {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+
+                >.container {
+                    position: relative;
+                    width: 100%;
+
+                    >canvas {
+                        width: 16.67em;
+                        border: 1px solid black;
+                    }
+
+                    >.container {
+                        position: absolute;
+                        top: 2px;
+                        right: 2px;
+                    }
+                }
+            }
         }
 
         >.buttons {
             display: flex;
             justify-content: center;
             position: relative;
-            > button#submit {
+
+            >button#submit {
                 color: rgb(var(--color-achromatic01));
                 background-color: rgb(var(--color-achromatic04));
                 border: none;
@@ -138,11 +172,13 @@
                 padding: .8em 8em;
                 cursor: pointer;
             }
-            > button#submit.active {
+
+            >button#submit.active {
                 /* background-color: rgb(var(--color-primary01)); */
                 background-color: rgb(var(--color-achromatic13));
             }
-            > #already-account {
+
+            >#already-account {
                 position: absolute;
                 top: calc(100% + 5px);
                 color: rgb(var(--color-achromatic13));
