@@ -172,7 +172,7 @@ const render = async () => {
 const setCaptchaTexts = () => {
     let captchaTexts = [];
     for(let index = 0; index < captchaLength; index++) {
-        const spell = random.createRandomSpelling();
+        const spell = random.createRandomSpelling("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
         const bold = random.createRandomBoolean();
         const deg = random.createRandomNumber(captchaDegRange[0], captchaDegRange[1]);
         const fontSize = random.createRandomNumber(captchaFontSizeRange[0], captchaFontSizeRange[1]);

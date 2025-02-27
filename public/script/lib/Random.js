@@ -10,10 +10,9 @@ export const createRandomNumber = (min, max) => Math.floor(Math.random() * (max 
  * 
  * @returns { char } a-Z
  */
-export const createRandomSpelling = () => {
-  const englishSpelling = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const num = Math.floor((Math.random() * englishSpelling.length));
-  const char = englishSpelling.charAt(num);
+export const createRandomSpelling = (englishSpellings = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") => {
+  const num = Math.floor((Math.random() * englishSpellings.length));
+  const char = englishSpellings.charAt(num);
 
   return char;
 }
