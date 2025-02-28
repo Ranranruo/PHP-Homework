@@ -104,16 +104,21 @@ const validateState = async () => {
             state[prop].valid = null;
             return;
         }
-        else if (prop === "captcha") {
-            state[prop].message = 'test';
+        else if (prop === "captcha") { // 캡차
+            const captchaString = state.captchaTexts.reduce((acc, captchaText) => {
+                return acc + captchaText.spell.toUpperCase();
+            }, '');
+            const value = state[prop].value.toUpperCase();
+            if(captchaString !== value) state[prop].message = 'Incorrect CAPTCHA.';
+            else state[prop].valid = true;
         }
-        else if (regexs.koreanRegex.test(value) && !rule.allowKorean)
+        else if (regexs.koreanRegex.test(value) && !rule.allowKorean) // 한국어
             state[prop].message = `${prop} cannot include Korean characters.`;
-        else if(length < rule.minLength || length > rule.maxLength)
+        else if(length < rule.minLength || length > rule.maxLength) // 길이
             state[prop].message = `${prop} must be between ${rule.minLength} and ${rule.maxLength} characters.`;
-        else if(!regexs.specialSymbolsRegex.test(value) && rule.requireSpecialSymbols)
+        else if(!regexs.specialSymbolsRegex.test(value) && rule.requireSpecialSymbols) // 특수 기호
             state[prop].message = `${prop} must include a special symbols.`;
-        else if(!regexs.numbersRegex.test(value) && rule.requireNumbers)
+        else if(!regexs.numbersRegex.test(value) && rule.requireNumbers) // 숫자
             state[prop].message = `${prop} must include a number.`;
         else {
             state[prop].valid = true;
@@ -126,6 +131,8 @@ const validateState = async () => {
                 state[prop].message = `${prop} is already in use`;
             }
         }
+
+        
     });
     await Promise.all(validationPromises);
     state.allValid = Object.values(state).find(object => !object.valid) === undefined;

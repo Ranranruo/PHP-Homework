@@ -21,6 +21,7 @@
             </li>
             <li class="input captcha">
                 <h1>* Captcha</h1>
+                <?=SVGs::Info()?>
                 <div class="container">
                     <canvas></canvas>
                     <div class="container">
