@@ -24,11 +24,11 @@
                 <div class="container">
                     <canvas></canvas>
                     <div class="container">
-                        <button type="button" id="reload"><img src="public/image/Repeat.svg" alt=""></button>
+                        <button type="button" id="reload"><?=SVGs::Repeat()?></button>
                     </div>
                 </div>
                 <p class="message"></p>
-                <input type="text" id="captcha">
+                <input type="password" id="captcha">
             </li>
         </ul>
         <div class="buttons">

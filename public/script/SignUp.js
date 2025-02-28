@@ -9,6 +9,7 @@ const $$input = document.querySelectorAll("input");
 const $submit = document.querySelector("#submit");
 const $eye = document.querySelector("#eye");
 const $password = document.querySelector("#password");
+const $reload = document.querySelector("#reload");
 
 const $canvas = document.querySelector("canvas");
 const ctx = $canvas.getContext("2d");
@@ -69,26 +70,21 @@ const initState = {
     }
 }
 
-const reRenderProps = ["value"];
+const reRenderProps = ["value", "captchaTexts"];
 
 const state = createDeepProxy(initState, {
     captchaTexts: [null, null, null, null, null],
     allValid: false,
     passwordHide: true,
     get(target, prop) {
-        if(prop === "allValid") return this.allValid;
-        if(prop === "passwordHide") return this.passwordHide;
-        if(prop === "captchaTexts") return this.captchaTexts;
+        if(target[prop] === undefined) return this[prop];
 
         return target[prop];
     },
     async set(target, prop, value) {
-        if(prop === "allValid") return this.allValid = value;
-        if(prop === "passwordHide") return this.passwordHide = value;
-        if(prop === "captchaTexts") return this.captchaTexts = value;
-
-        if(!(prop in target)) throw new Error("Cannot add new property to state")
-        target[prop] = value;
+        if(!(prop in target) && !(prop in this)) throw new Error("Cannot add new property to state");
+        if(target[prop] === undefined) this[prop] = value;
+        else target[prop] = value;
         if(reRenderProps.includes(prop)) {
             await validateState();
             await render();
@@ -155,6 +151,7 @@ const render = async () => {
     else $submit.classList.remove("active");
 
     // captcha
+    ctx.clearRect(0, 0, $canvas.clientWidth, $canvas.clientHeight);
     state.captchaTexts.forEach(({ spell, bold, deg, fontSize, colors }, index) => {
         ctx.save();
         ctx.font = `${bold ? "bold" : ""} ${fontSize}px Captcha`;
@@ -183,8 +180,6 @@ const setCaptchaTexts = () => {
     state.captchaTexts = captchaTexts;
 }
 
-setCaptchaTexts();
-
 $$input.forEach($input => $input.addEventListener("input", async (event) => {
     const id = event.target.id;
     const value = event.target.value;
@@ -196,6 +191,11 @@ $$input.forEach($input => $input.addEventListener("input", async (event) => {
 $eye.addEventListener("click", (event) => {
     const newType = $password.type === "text" ? "password" : "text";
     $password.type = newType;
+});
+
+// captcha reload
+$reload.addEventListener("click", (event) => {
+    setCaptchaTexts();
 });
 
 // submit
@@ -211,3 +211,5 @@ $submit.addEventListener("click", (event) => {
     alert(message);
     event.preventDefault();
 });
+
+setCaptchaTexts();
